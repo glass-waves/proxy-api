@@ -2,7 +2,8 @@ require('dotenv').config();
 const geoData = require('../data/geo-data.js')
 const weatherData = require('../data/weather-data.js');
 const reviewData = require('../data/yelp-data.js')
-const { formatLocation, formatWeather, parseReviewData } = require('../data/dataUtils');
+const trailData = require('../data/trail-data.js')
+const { formatLocation, formatWeather, parseReviewData, parseParkData } = require('../data/dataUtils');
 
 test('returns first city formatted correctly', async () => {
 
@@ -95,6 +96,29 @@ test('returns first 7 restaurant reviews', async () => {
 
 
     const data = parseReviewData(reviewData)
+
+    expect(data).toEqual(expectation);
+});
+test('parses park data into desired format', async () => {
+
+
+
+    const expectation = [
+        {
+            "name": "California National Historic Trail",
+            "location": "CA,CO,ID,KS,MO,NE,NV,OR,UT,WY",
+            "stars": "N/A",
+            "star_votes": "N/A",
+            "summary": "Follow in the footsteps of over 250,000 emigrants who traveled to the gold fields and rich farmlands of California during the 1840s and 1850s: the greatest mass migration in American history. The California National Historic Trail is over 5,000 miles long and covers portions of 10 states. Step into history along more than 1,000 miles of ruts and traces from travelers and their overland wagons.",
+            "trail_url": "https://www.nps.gov/cali/index.htm",
+            "conditions": "Due to the length of the California National Historic Trail, be sure to consult local weather sources for the region you'll be visiting. Check out the forecast with the National Weather Service and search for the area you'd like to visit: www.weather.gov",
+            "condition_date": "lat:42.3999643979285, long:-108.702415369046",
+            "condition_time": "B39C368F-CB27-49EC-B2A9-E6C1552430FB"
+        }
+    ];
+
+
+    const data = parseParkData(trailData)
 
     expect(data).toEqual(expectation);
 });

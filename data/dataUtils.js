@@ -38,10 +38,22 @@ const parseStateData = (stateData) => {
 }
 
 const parseParkData = (parkData) => {
-    parkData.map(park => {
-        
+    console.log('park data in munge function', parkData)
+    const mappedData= parkData.map(park => {
+        return {
+            name: park.fullName,
+            location: park.states,
+            stars: 'N/A',
+            star_votes: 'N/A',
+            summary: park.description,
+            trail_url: park.url,
+            conditions: park.weatherInfo,
+            condition_date: park.latLong,
+            condition_time: park.id,
+        }
     })
+    return mappedData.slice(0, 7);
 }
 
 
-module.exports = {formatLocation, formatWeather, parseReviewData, parseStateData};
+module.exports = {formatLocation, formatWeather, parseReviewData, parseStateData, parseParkData};
