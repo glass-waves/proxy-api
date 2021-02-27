@@ -9,9 +9,9 @@ const formatLocation = (locData) => {
 
 const formatWeather = (weatherData) => {
 
-    const dataArr = weatherData.body.data;
+    const dataArr = weatherData.data;
     const mungedDataArr = dataArr.map(day => {
-        const correctDate = new Date(day.ts * 1000);
+        const correctDate = new Date(day.ts * 1000).toDateString();
         return {
             forecast: day.weather.description,
             time: correctDate 
@@ -21,7 +21,7 @@ const formatWeather = (weatherData) => {
 }
 
 const parseReviewData = (reviewData) => {
-    const parsedData = reviewData.body.businesses.map(business => {
+    const parsedData = reviewData.map(business => {
         return {
             name: business.name,
             image_url: business.image_url,
@@ -33,5 +33,15 @@ const parseReviewData = (reviewData) => {
     return parsedData.slice(0,7);
 }
 
+const parseStateData = (stateData) => {
+    return stateData.address.state_code;
+}
 
-module.exports = {formatLocation, formatWeather, parseReviewData};
+const parseParkData = (parkData) => {
+    parkData.map(park => {
+        
+    })
+}
+
+
+module.exports = {formatLocation, formatWeather, parseReviewData, parseStateData};
